@@ -3,8 +3,9 @@ const taskController = require('../controller/taskController');
 
 const router = express.Router();
 
-router.get("/tasks", taskController.funcGetUsers);
-router.get("/tasks/:id", taskController.funcGetUsers);
-
+router.get("/", taskController.getAllTasks);
+router.get("/:id", taskController.getTask);
+router.delete("/:id", taskController.deleteTask);
+router.post("/", taskController.createTask);
 
 module.exports = router;

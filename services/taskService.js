@@ -29,14 +29,18 @@ exports.deleteTask = async (req, res) => {
     }
 }
 
-exports.createTask = async (taskData) => {
-    const { data, error } = await cliente.supabase
-      .from('tasks')
-      .insert([taskData])
-      .select()
-      .single();
+exports.createTask = async (req, res) => {
+    try {
+      const taskData = req.body; 
+      const { data } = await cliente.supabase
+        .from('tasks')
+        .insert([taskData])
+        .select()
+        .single();
+
+      res.send(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
-    if (error) throw error;
-  
-    return data;
-};
